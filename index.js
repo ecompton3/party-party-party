@@ -5,14 +5,23 @@ const toGreyscale = require("./lib/grayscale");
 // The party palette. Party on, Sirocco!
 const colours = [
     [255, 141, 139],
+    [27, 217, 196],
     [254, 214, 137],
+    [27, 217, 196],
     [136, 255, 137],
+    [27, 217, 196],
     [135, 255, 255],
+    [27, 217, 196],
     [139, 181, 254],
+    [27, 217, 196],
     [215, 140, 255],
+    [27, 217, 196],
     [255, 140, 255],
+    [27, 217, 196],
     [255, 104, 247],
+    [27, 217, 196],
     [254, 108, 183],
+    [27, 217, 196],
     [255, 105, 104]
 ];
 
@@ -69,11 +78,11 @@ function createPartyImage(inputFilename, outputStream, partyRadius, rotationSpee
         const gif = new gifEncoder(shape[0], shape[1]);
         gif.pipe(outputStream);
 
-        gif.setDelay(50);
+        gif.setFrameRate(60)
         gif.setRepeat(0);
         gif.setTransparent("0x00FF00");
         gif.writeHeader();
-        gif.on("readable", function() {
+        gif.on("readable", function () {
             gif.read();
         });
 
@@ -84,7 +93,7 @@ function createPartyImage(inputFilename, outputStream, partyRadius, rotationSpee
             return arr[x + y * shape[0]];
         }
 
-        colours.forEach(function(c, colourIndex) {
+        colours.forEach(function (c, colourIndex) {
             const offset = partyOffset[colourIndex];
             const p = [];
             let rotX, rotY;
